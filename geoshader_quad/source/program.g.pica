@@ -1,0 +1,69 @@
+; Example PICA200 geometry shader
+
+; Uniforms
+.fvec projection[4]
+
+; Constants
+.constf myconst(0.0, 1.0, -1.0, 0.5)
+.alias  zeros myconst.xxxx ; Vector full of zeros
+.alias  ones  myconst.yyyy ; Vector full of ones
+.alias  half  myconst.wwww
+
+; Outputs - this time the type *is* used
+.out outpos position
+.out outclr color
+
+; Inputs: we will receive the following inputs:
+; v0-v1: position/color of the first vertex
+; v2-v3: position/color of the second vertex
+; v4-v5: position/color of the third vertex
+
+.gsh
+.entry gmain
+.proc gmain
+	; Load the first vertex into the output buffer
+	setemit 0
+	mov r8, v0
+	mov r9, v1
+	call process_vertex
+	emit
+	
+	; Load the second vertex
+	setemit 1
+	mov r8, v2
+	mov r9, v3
+	call process_vertex
+	emit
+	
+	; Load the third vertex and emit primitive
+	setemit 2, prim
+	mov r8, v4
+	mov r9, v5
+	call process_vertex
+	emit
+	
+	; Load the fourth vertex and emit primitive
+	setemit 2, prim inv
+	mov r8, v6
+	mov r9, v7
+	call process_vertex
+	emit
+
+	; We're finished
+	end
+.end
+
+; Subroutine
+; Inputs:
+;   r8: vertex position
+;   r9: vertex color
+.proc process_vertex
+	; outpos = projectionMatrix * r8
+	dp4 outpos.x, projection[0], r8
+	dp4 outpos.y, projection[1], r8
+	dp4 outpos.z, projection[2], r8
+	dp4 outpos.w, projection[3], r8
+
+	; outclr = r9
+	mov outclr, r9
+.end
