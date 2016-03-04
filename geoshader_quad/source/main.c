@@ -14,10 +14,10 @@ typedef struct { float position[3]; float color[4]; } vertex;
 
 static const vertex vertex_list[] =
 {
-	{ {200.0f, 200.0f, 0.5f}, {1.0f, 0.0f, 0.0f, 1.0f} },
-	{ {300.0f, 200.0f, 0.5f}, {0.0f, 1.0f, 0.0f, 1.0f} },
-	{ {300.0f, 60.0f, 0.5f}, {0.0f, 0.0f, 1.0f, 1.0f} },
-	{ {200.0f, 60.0f, 0.5f}, {1.0f, 1.0f, 1.0f, 1.0f} },
+	{ {200.0f, 60.0f, 0.5f}, {1.0f, 0.0f, 0.0f, 1.0f} },
+	{ {300.0f, 60.0f, 0.5f}, {0.0f, 1.0f, 0.0f, 1.0f} },
+	{ {300.0f, 200.0f, 0.5f}, {0.0f, 0.0f, 1.0f, 1.0f} },
+	{ {200.0f, 200.0f, 0.5f}, {1.0f, 1.0f, 1.0f, 1.0f} },
 };
 
 #define vertex_list_count (sizeof(vertex_list)/sizeof(vertex_list[0]))
