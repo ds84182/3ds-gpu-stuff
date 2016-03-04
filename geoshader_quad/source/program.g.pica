@@ -42,8 +42,22 @@
 	call process_vertex
 	emit
 	
-	; Load the fourth vertex and emit primitive
-	setemit 2, prim inv
+	; Load the first vertex into the output buffer
+	setemit 0
+	mov r8, v0
+	mov r9, v1
+	call process_vertex
+	emit
+	
+	; Load the second vertex
+	setemit 1
+	mov r8, v4
+	mov r9, v5
+	call process_vertex
+	emit
+	
+	; Load the third vertex and emit primitive
+	setemit 2, prim
 	mov r8, v6
 	mov r9, v7
 	call process_vertex
